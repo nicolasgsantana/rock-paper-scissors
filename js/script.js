@@ -1,3 +1,6 @@
+let playerScore = 0;
+let computerScore = 0;
+
 function getComputerChoice(){
     const CHOICES = ["Rock", "Paper", "Scissors"];
     return CHOICES[Math.floor(Math.random() * CHOICES.length)];
@@ -40,36 +43,47 @@ function playRound(playerChoice, computerChoice){
 }
 
 function game(playerChoice){
-    const ROUNDS = 5;
-    let playerScore = 0;
-    let computerScore = 0;
+    let computerChoice = getComputerChoice();
 
-    for(let i = 0; i < ROUNDS; i++){
-        let computerChoice = getComputerChoice();
+    let result = playRound(playerChoice, computerChoice);
 
-        let result = playRound(playerChoice, computerChoice);
-
-        if(result > 0) {
-            playerScore++;
-            console.log(`You Win! ${playerChoice} beats ${computerChoice}`);
-        }
-        else if(result < 0){
-            computerScore++;
-            console.log(`You Lose! ${computerChoice} beats ${playerChoice}`);
-        }
-        else {
-            console.log("It's a tie!");
-        }
+    if(result > 0) {
+        playerScore++;
+        return `You Won the round! ${playerChoice} beats ${computerChoice}`;
     }
-
-    if(playerScore > computerScore){
-        console.log("You Won the game!")
-    }
-    else if (playerScore < computerScore){
-        console.log("You Lost the game...")
+    else if(result < 0){
+        computerScore++;
+        return `You Lost the round! ${computerChoice} beats ${playerChoice}`;
     }
     else {
-        console.log("The game tied!")
+        return "It's a tie!";
     }
-    console.log(`Final Scores\nPlayer Score: ${playerScore}\nComputer Score: ${computerScore}`);
+
+    // if(playerScore > computerScore){
+    //     console.log("You Won the game!")
+    // }
+    // else if (playerScore < computerScore){
+    //     console.log("You Lost the game...")
+    // }
+    // else {
+    //     console.log("The game tied!")
+    // }
+    // console.log(`Final Scores\nPlayer Score: ${playerScore}\nComputer Score: ${computerScore}`);
 }
+
+const rockBtn = document.querySelector("#rock");
+const paperBtn = document.querySelector("#paper");
+const scissorsBtn = document.querySelector("#scissors");
+const placeholderParagraph = document.querySelector("p");
+
+rockBtn.addEventListener('click', () => {
+    placeholderParagraph.textContent = game("Rock");
+})
+
+paperBtn.addEventListener('click', () => {
+    placeholderParagraph.textContent = game("Paper");
+})
+
+scissorsBtn.addEventListener('click', () => {
+    placeholderParagraph.textContent = game("Scissors");
+})
