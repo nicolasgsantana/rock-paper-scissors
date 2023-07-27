@@ -42,7 +42,7 @@ function playRound(playerChoice, computerChoice){
     }
 }
 
-function game(playerChoice){
+function runGame(playerChoice){
     let computerChoice = getComputerChoice();
 
     let result = playRound(playerChoice, computerChoice);
@@ -57,18 +57,25 @@ function game(playerChoice){
     }
     else {
         return "It's a tie!";
-    }
+    } 
+}
 
-    // if(playerScore > computerScore){
-    //     console.log("You Won the game!")
-    // }
-    // else if (playerScore < computerScore){
-    //     console.log("You Lost the game...")
-    // }
-    // else {
-    //     console.log("The game tied!")
-    // }
-    // console.log(`Final Scores\nPlayer Score: ${playerScore}\nComputer Score: ${computerScore}`);
+function finishGame() {
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+
+    let finalScore = `Final Scores\nPlayer Score: ${playerScore}\nComputer Score: ${computerScore}`;
+
+    if(playerScore > computerScore){
+        return "You Won the game!";
+    }
+    else if (playerScore < computerScore){
+        return "You Lost the game...";
+    }
+    else {
+        return "The game tied!";
+    }
 }
 
 const rockBtn = document.querySelector("#rock");
@@ -77,13 +84,13 @@ const scissorsBtn = document.querySelector("#scissors");
 const placeholderParagraph = document.querySelector("p");
 
 rockBtn.addEventListener('click', () => {
-    placeholderParagraph.textContent = game("Rock");
+    placeholderParagraph.textContent = runGame("Rock");
 })
 
 paperBtn.addEventListener('click', () => {
-    placeholderParagraph.textContent = game("Paper");
+    placeholderParagraph.textContent = runGame("Paper");
 })
 
 scissorsBtn.addEventListener('click', () => {
-    placeholderParagraph.textContent = game("Scissors");
+    placeholderParagraph.textContent = runGame("Scissors");
 })
