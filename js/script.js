@@ -7,7 +7,7 @@ function getComputerChoice(){
     return CHOICES[Math.floor(Math.random() * CHOICES.length)];
 }
 
-function playRound(playerChoice, computerChoice){
+function checkWinner(playerChoice, computerChoice){
     if(playerChoice === "Rock") {
         if(computerChoice === "Rock"){
             return 0;
@@ -43,18 +43,49 @@ function playRound(playerChoice, computerChoice){
     }
 }
 
-function startGame(){
-    rockBtn.disabled = true;
-    paperBtn.disabled = true;
-    scissorsBtn.disabled = true;
-    
-    
+function toggleButtons(){
+    if(rockBtn.disabled){
+        rockBtn.disabled = false;
+        paperBtn.disabled = false;
+        scissorsBtn.disabled = false;
+        resetBtn.disabled = false;
+    }
+    else {
+        rockBtn.disabled = true;
+        paperBtn.disabled = true;
+        scissorsBtn.disabled = true;
+        resetBtn.disabled = true;
+    }   
 }
 
-function runGame(playerChoice){
+function startRound(playerChoice){
+    toggleButtons();
+
+    let roundAudio;
+    if(round < 5){
+        roundAudio = new Audio(`./sounds/round${round}.wav`);
+        announcementText.textContent = `Round ${round}`;
+    }
+    else{
+        roundAudio = new Audio('./sounds/finalround.wav');
+        announcementText.textContent = "Final Round";
+    }
+
+    const goAudio = new Audio('./sounds/go.wav');
+    
+    resultText.textContent = "";
+
+    roundAudio.addEventListener('ended', () => goAudio.play());
+    goAudio.addEventListener('ended', () => playRound(playerChoice));
+
+    roundAudio.play();
+}
+
+function playRound(playerChoice){
+    
     const computerChoice = getComputerChoice();
 
-    const result = playRound(playerChoice, computerChoice);
+    const result = checkWinner(playerChoice, computerChoice);
 
     setImageAttributes(playerChoiceImg, `./img/${playerChoice.toLowerCase()}.png`, `a hand emoji representing ${playerChoice}`);
     setImageAttributes(computerChoiceImg, `./img/${computerChoice.toLocaleLowerCase()}.png`, `a hand emoji representing ${computerChoice}`);
@@ -63,36 +94,83 @@ function runGame(playerChoice){
         playerScoreText.textContent = ++playerScore;
         announcementText.textContent = "You Win!";
         resultText.textContent = `${playerChoice} beats ${computerChoice}`;
+
+        const audio = new Audio('./sounds/youwin.wav');
+        audio.addEventListener('ended', () => finishRound());
+        audio.play()
     }
     else if(result < 0){
         computerScoreText.textContent = ++computerScore;
         announcementText.textContent = "You Lose";
         resultText.textContent = `${computerChoice} beats ${playerChoice}`;
+
+        const audio = new Audio('./sounds/youlose.wav');
+        audio.addEventListener('ended', () => finishRound());
+        audio.play()
     }
     else {
         announcementText.textContent = "It's a tie!";
         resultText.textContent = " ";
-    }
 
-    round++; 
+        const audio = new Audio('./sounds/roundover.wav');
+        audio.addEventListener('ended', () => finishRound());
+        audio.play()
+    }
 }
 
-function finishGame() {
-    rockBtn.disabled = true;
-    paperBtn.disabled = true;
-    scissorsBtn.disabled = true;
+function finishRound() {
+    round++;
 
-    if(playerScore > computerScore){
-        announcementText.textContent = "You Won the game!";
-    }
-    else if (playerScore < computerScore){
-        announcementText.textContent = "You Lost the game...";
-    }
-    else {
-        announcementText.textContent = "The game tied!";
-    }
+    toggleButtons();
 
-    resultText.textContent = "";
+    if(round > 5) {
+        toggleButtons();
+
+        if(playerScore > computerScore){
+            announcementText.textContent = "You Won the game!";
+            const audio = new Audio('./sounds/winner.wav');
+            audio.play()
+        }
+        else if (playerScore < computerScore){
+            announcementText.textContent = "You Lost the game...";
+            const audio = new Audio('./sounds/loser.wav');
+            audio.play()
+        }
+        else {
+            announcementText.textContent = "The game tied!";
+            const audio = new Audio('./sounds/dudecomeon.wav');
+            audio.play()
+        }
+
+        resetBtn.disabled = false;
+    
+        resultText.textContent = "";
+    }
+}
+
+function reset() {
+    resetBtn.disabled = true;
+
+    const audio = new Audio('./sounds/getreadyforthenextfight.wav');
+    audio.play();
+
+    if(rockBtn.disabled){
+        toggleButtons();
+    }
+    
+    setImageAttributes(playerChoiceImg, "", "");
+    setImageAttributes(computerChoiceImg, "", "");
+
+    playerScore = 0;
+    playerScoreText.textContent = playerScore;
+
+    computerScoreScore = 0;
+    computerScoreText.textContent = computerScoreScore;
+
+    round = 1;
+
+    announcementText.textContent = "Welcome to Rock Paper Scissors";
+    resultText.textContent = "Choose a hand to start the game!"
 }
 
 function setImageAttributes(image, src, alt){
@@ -100,10 +178,11 @@ function setImageAttributes(image, src, alt){
     image.setAttribute("alt", alt);
 }
 
-
 const rockBtn = document.querySelector("#rock");
 const paperBtn = document.querySelector("#paper");
 const scissorsBtn = document.querySelector("#scissors");
+
+const resetBtn = document.querySelector("#reset");
 
 const announcementText = document.querySelector("#announcement-text");
 const resultText = document.querySelector("#result-text");
@@ -114,10 +193,10 @@ const computerScoreText = document.querySelector(".computer.score");
 const playerChoiceImg = document.querySelector("#player-choice");
 const computerChoiceImg = document.querySelector("#computer-choice");
 
-rockBtn.addEventListener('click', () => runGame("Rock"));
+rockBtn.addEventListener('click', () => startRound("Rock"));
 
-paperBtn.addEventListener('click', () => runGame("Paper"));
+paperBtn.addEventListener('click', () => startRound("Paper"));
 
-scissorsBtn.addEventListener('click', () => runGame("Scissors"));
+scissorsBtn.addEventListener('click', () => startRound("Scissors"));
 
-// startGame();
+resetBtn.addEventListener('click', () => reset());
