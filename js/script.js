@@ -47,6 +47,8 @@ function startGame(){
     rockBtn.disabled = true;
     paperBtn.disabled = true;
     scissorsBtn.disabled = true;
+    
+    
 }
 
 function runGame(playerChoice){
@@ -97,6 +99,7 @@ function setImageAttributes(image, src, alt){
     image.setAttribute("src", src);
     image.setAttribute("alt", alt);
 }
+
 
 const rockBtn = document.querySelector("#rock");
 const paperBtn = document.querySelector("#paper");
