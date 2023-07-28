@@ -1,5 +1,6 @@
 let playerScore = 0;
 let computerScore = 0;
+let round = 1;
 
 function getComputerChoice(){
     const CHOICES = ["Rock", "Paper", "Scissors"];
@@ -42,22 +43,36 @@ function playRound(playerChoice, computerChoice){
     }
 }
 
-function runGame(playerChoice){
-    let computerChoice = getComputerChoice();
+function startGame(){
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+}
 
-    let result = playRound(playerChoice, computerChoice);
+function runGame(playerChoice){
+    const computerChoice = getComputerChoice();
+
+    const result = playRound(playerChoice, computerChoice);
+
+    setImageAttributes(playerChoiceImg, `./img/${playerChoice.toLowerCase()}.png`, `a hand emoji representing ${playerChoice}`);
+    setImageAttributes(computerChoiceImg, `./img/${computerChoice.toLocaleLowerCase()}.png`, `a hand emoji representing ${computerChoice}`);
 
     if(result > 0) {
-        playerScore++;
-        return `You Won the round! ${playerChoice} beats ${computerChoice}`;
+        playerScoreText.textContent = ++playerScore;
+        announcementText.textContent = "You Win!";
+        resultText.textContent = `${playerChoice} beats ${computerChoice}`;
     }
     else if(result < 0){
-        computerScore++;
-        return `You Lost the round! ${computerChoice} beats ${playerChoice}`;
+        computerScoreText.textContent = ++computerScore;
+        announcementText.textContent = "You Lose";
+        resultText.textContent = `${computerChoice} beats ${playerChoice}`;
     }
     else {
-        return "It's a tie!";
-    } 
+        announcementText.textContent = "It's a tie!";
+        resultText.textContent = " ";
+    }
+
+    round++; 
 }
 
 function finishGame() {
@@ -65,32 +80,41 @@ function finishGame() {
     paperBtn.disabled = true;
     scissorsBtn.disabled = true;
 
-    let finalScore = `Final Scores\nPlayer Score: ${playerScore}\nComputer Score: ${computerScore}`;
-
     if(playerScore > computerScore){
-        return "You Won the game!";
+        announcementText.textContent = "You Won the game!";
     }
     else if (playerScore < computerScore){
-        return "You Lost the game...";
+        announcementText.textContent = "You Lost the game...";
     }
     else {
-        return "The game tied!";
+        announcementText.textContent = "The game tied!";
     }
+
+    resultText.textContent = "";
+}
+
+function setImageAttributes(image, src, alt){
+    image.setAttribute("src", src);
+    image.setAttribute("alt", alt);
 }
 
 const rockBtn = document.querySelector("#rock");
 const paperBtn = document.querySelector("#paper");
 const scissorsBtn = document.querySelector("#scissors");
-const placeholderParagraph = document.querySelector("p");
 
-rockBtn.addEventListener('click', () => {
-    placeholderParagraph.textContent = runGame("Rock");
-})
+const announcementText = document.querySelector("#announcement-text");
+const resultText = document.querySelector("#result-text");
 
-paperBtn.addEventListener('click', () => {
-    placeholderParagraph.textContent = runGame("Paper");
-})
+const playerScoreText = document.querySelector(".player.score");
+const computerScoreText = document.querySelector(".computer.score");
 
-scissorsBtn.addEventListener('click', () => {
-    placeholderParagraph.textContent = runGame("Scissors");
-})
+const playerChoiceImg = document.querySelector("#player-choice");
+const computerChoiceImg = document.querySelector("#computer-choice");
+
+rockBtn.addEventListener('click', () => runGame("Rock"));
+
+paperBtn.addEventListener('click', () => runGame("Paper"));
+
+scissorsBtn.addEventListener('click', () => runGame("Scissors"));
+
+// startGame();
