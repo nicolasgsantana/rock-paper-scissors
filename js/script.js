@@ -59,6 +59,8 @@ function toggleButtons(){
 }
 
 function startRound(playerChoice){
+    setImageAttributes(playerChoiceImg, "", "");
+    setImageAttributes(computerChoiceImg, "", "");
     toggleButtons();
 
     let roundAudio;
@@ -164,8 +166,8 @@ function reset() {
     playerScore = 0;
     playerScoreText.textContent = playerScore;
 
-    computerScoreScore = 0;
-    computerScoreText.textContent = computerScoreScore;
+    computerScore = 0;
+    computerScoreText.textContent = computerScore;
 
     round = 1;
 
