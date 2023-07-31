@@ -4,39 +4,35 @@
 }
 
 body {
-    height: 100%;
-    width: 100%;
-    padding: 24px;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 main {
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: column;
-}
-
-footer {
-    display: flex;
     margin-top: auto;
 }
 
 img {
-    height: 20vh;
-    width: 20vh;
+    height: auto;
+    width: 10vw;
 }
 
 .results img {
-    height: 30vh;
-    width:30vh;
+    height: auto;
+    width:15vw;
     border: 2px solid black;
 }
 
 div.announcement {
     height: 10vh; /* h1 font size + h2 font size */
-    width: auto;
+    width: 100vw;
+    padding-top: 2.5vh;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -47,22 +43,40 @@ div.results {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    font-size: 30vh;
+    font-size: 15vw;
 }
 
 div.score {
     text-align: center;
     font-size: medium;
-    font-size: 5vh;
+    font-size: 2.5vw;
 }
 
 .score {
-    font-size: 25vh;
+    font-size: 12.5vw;
+}
+
+button {
+    padding: 1vh;
 }
 
 div.buttons {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
+    row-gap: 2vh;
 }
+
+div.buttons div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    column-gap: 5vw;
+}
+
+footer {
+    display: block;
+    margin-top: auto;
+    padding: 2.5vh;
+}
+
