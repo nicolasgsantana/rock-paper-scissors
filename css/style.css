@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Graduate&family=Roboto&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -6,6 +8,7 @@
 body {
     height: 100vh;
     width: 100vw;
+    background-color: #FFFBFF;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,6 +20,8 @@ main {
     flex-direction: column;
     margin-top: auto;
     row-gap: 5vh;
+    font-family: 'Graduate', cursive;
+    color: #0A0903;
 }
 
 img {
@@ -27,16 +32,20 @@ img {
 .results img {
     height: auto;
     width:15vw;
-    border: 10px double black;
+    border: 10px double #0A0903;
 }
 
 div.announcement {
     height: 64px; /* h1 font size + h2 font size */
     width: 100vw;
     padding: 2.5vh 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #7067CF;
+    color: #FFFBFF;
     text-align: center;
     display: flex;
     flex-direction: column;
+    row-gap: 8px;
 }
 
 div.results {
@@ -44,7 +53,7 @@ div.results {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    font-size: 15vw;
+    font-size: 12.5vw;
 }
 
 div.score {
@@ -54,11 +63,23 @@ div.score {
 }
 
 .score {
-    font-size: 12.5vw;
+    font-size: 10vw;
 }
 
 button {
     padding: 1vh;
+    background-color: #FFFBFF;
+    border: #0A0903 solid 2px;
+    font-family: 'Graduate', cursive;
+    font-size: 24px;
+}
+
+button:hover:enabled {
+    background-color: #d6d6d6;
+}
+
+button:disabled {
+    background-color: darkgrey;
 }
 
 div.buttons {
@@ -77,7 +98,12 @@ div.buttons div {
 
 footer {
     display: block;
+    width: 100vw;
     margin-top: auto;
-    padding: 2.5vh;
+    padding: 2.5vh 0;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    background-color: #7067CF;
+    color: #FFFBFF;
 }
 
