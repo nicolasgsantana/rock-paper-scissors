@@ -16,6 +16,7 @@ main {
     display: flex;
     flex-direction: column;
     margin-top: auto;
+    row-gap: 5vh;
 }
 
 img {
@@ -26,13 +27,13 @@ img {
 .results img {
     height: auto;
     width:15vw;
-    border: 2px solid black;
+    border: 10px double black;
 }
 
 div.announcement {
-    height: 10vh; /* h1 font size + h2 font size */
+    height: 64px; /* h1 font size + h2 font size */
     width: 100vw;
-    padding-top: 2.5vh;
+    padding: 2.5vh 0;
     text-align: center;
     display: flex;
     flex-direction: column;
