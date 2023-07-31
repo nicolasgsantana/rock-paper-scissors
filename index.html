@@ -8,22 +8,32 @@
   <script src="./js/script.js" defer></script>
 </head>
 <body>
-    <h1 id="announcement-text">Welcome to Rock Paper Scissors</h1>
-    <h2 id="result-text">Choose a hand to start the game!</h2> 
-  <main>
-    <p class="player score">0</p>
-    <p class="player">Player</p>
-    <img id="player-choice" src="" alt="">
-    <p>vs</p>
-    <img id="computer-choice" src="" alt="">
-    <p class="computer score">0</p>
-    <p class="computer">Computer</p>
-    <div>
-      <button id="rock" type="button"><img src="./img/rock.png" alt="a hand emoji representing rock"></button>
-      <button id="paper" type="button"><img src="./img/paper.png" alt="a hand emoji representing paper"></button>
-      <button id="scissors" type="button"><img src="./img/scissors.png" alt="a hand emoji representing scissors"></button>
+    <div class="announcement">
+      <h1 id="announcement-text">Welcome to Rock Paper Scissors</h1>
+      <h2 id="result-text">Choose a hand to start the game!</h2>
     </div>
-    <button id="reset">Reset</button>
+  <main>
+    <div class="results">
+      <div class="score">
+        <p class="player score">0</p>
+        <p class="player">Player</p>
+      </div>
+      <img id="player-choice" src="./img/none.png" alt="">
+      <p>vs</p>
+      <img id="computer-choice" src="./img/none.png" alt="">
+      <div class="score">
+        <p class="computer score">0</p>
+        <p class="computer">Computer</p>
+      </div>
+    </div>
+    <div class="buttons">
+      <div>
+        <button id="rock" type="button"><img src="./img/rock.png" alt="a hand emoji representing rock"></button>
+        <button id="paper" type="button"><img src="./img/paper.png" alt="a hand emoji representing paper"></button>
+        <button id="scissors" type="button"><img src="./img/scissors.png" alt="a hand emoji representing scissors"></button>
+      </div>
+      <button id="reset">Reset</button>
+    </div>
   </main>
   <footer>
     <p>Footer Placeholder</p>

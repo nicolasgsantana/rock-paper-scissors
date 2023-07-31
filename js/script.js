@@ -59,8 +59,8 @@ function toggleButtons(){
 }
 
 function startRound(playerChoice){
-    setImageAttributes(playerChoiceImg, "", "");
-    setImageAttributes(computerChoiceImg, "", "");
+    setImageAttributes(playerChoiceImg, "./img/none.png", "");
+    setImageAttributes(computerChoiceImg, "./img/none.png", "");
     toggleButtons();
 
     let roundAudio;
@@ -160,8 +160,8 @@ function reset() {
         toggleButtons();
     }
     
-    setImageAttributes(playerChoiceImg, "", "");
-    setImageAttributes(computerChoiceImg, "", "");
+    setImageAttributes(playerChoiceImg, "./img/none.png", "");
+    setImageAttributes(computerChoiceImg, "./img/none.png", "");
 
     playerScore = 0;
     playerScoreText.textContent = playerScore;
