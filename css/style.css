@@ -24,6 +24,14 @@ main {
     color: #0A0903;
 }
 
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 28px;
+}
+
 img {
     height: auto;
     width: 10vw;
@@ -36,7 +44,7 @@ img {
 }
 
 div.announcement {
-    height: 64px; /* h1 font size + h2 font size */
+    height: 72px; /* h1 font size + h2 font size */
     width: 100vw;
     padding: 2.5vh 0;
     font-family: 'Roboto', sans-serif;
@@ -102,12 +110,14 @@ footer {
     margin-top: auto;
     padding: 2.5vh 0;
     font-family: 'Roboto', sans-serif;
+    font-size: 18px;
     text-align: center;
     background-color: #7067CF;
     color: #FFFBFF;
 }
 
 a {
-    color: #7b287d;
+    color: #0A0903;
+    text-decoration: none;
 }
 
